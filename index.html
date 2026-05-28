@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitation</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #111;
+      font-family: Arial, sans-serif;
+    }
+
+    .invite-section,
+    .ticket-section {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .invite-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .invite-image,
+    .ticket-image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .ticket-button {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      z-index: 10;
+      width: calc(100% - 40px);
+      max-width: 420px;
+      padding: 16px 24px;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #111111;
+      text-align: center;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .ticket-section {
+      min-height: 100vh;
+      padding: 40px 0 100px;
+      background: #111;
+    }
+
+    .ticket-wrap {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    @media (max-width: 600px) {
+      .ticket-button {
+        bottom: 16px;
+        font-size: 16px;
+      }
+
+      .ticket-section {
+        padding-top: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="invite-section" aria-label="초대장">
+      <div class="invite-wrap">
+        <img class="invite-image" src="invite.jpg" alt="초대장">
+      </div>
+    </section>
+
+    <a class="ticket-button" href="#ticket">티켓 확인하기</a>
+
+    <section id="ticket" class="ticket-section" aria-label="티켓">
+      <div class="ticket-wrap">
+        <img class="ticket-image" src="ticket.png" alt="티켓">
+      </div>
+    </section>
+  </main>
+</body>
+</html>
