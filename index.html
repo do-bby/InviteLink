@@ -9,18 +9,13 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       margin: 0;
       background: #111;
       font-family: Arial, sans-serif;
     }
 
-    .invite-section,
-    .ticket-section {
+    .invite-section {
       width: 100%;
       display: flex;
       justify-content: center;
@@ -57,17 +52,52 @@
       font-size: 18px;
       font-weight: 700;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      border: 0;
+      cursor: pointer;
     }
 
-    .ticket-section {
-      min-height: 100vh;
-      padding: 40px 0 100px;
-      background: #111;
+    .ticket-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0, 0, 0, 0.75);
     }
 
-    .ticket-wrap {
+    .ticket-modal.is-open {
+      display: flex;
+    }
+
+    .ticket-modal-content {
+      position: relative;
       width: 100%;
-      max-width: 900px;
+      max-width: 720px;
+      max-height: 90vh;
+    }
+
+    .ticket-image {
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #111111;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     }
 
     @media (max-width: 600px) {
@@ -76,8 +106,13 @@
         font-size: 16px;
       }
 
-      .ticket-section {
-        padding-top: 24px;
+      .ticket-modal {
+        padding: 18px;
+      }
+
+      .modal-close {
+        top: -12px;
+        right: -8px;
       }
     }
   </style>
@@ -90,13 +125,36 @@
       </div>
     </section>
 
-    <a class="ticket-button" href="#ticket">티켓 확인하기</a>
+    <button class="ticket-button" type="button" id="openTicket">티켓 확인하기</button>
 
-    <section id="ticket" class="ticket-section" aria-label="티켓">
-      <div class="ticket-wrap">
+    <div class="ticket-modal" id="ticketModal" aria-hidden="true">
+      <div class="ticket-modal-content" role="dialog" aria-modal="true" aria-label="티켓">
+        <button class="modal-close" type="button" id="closeTicket" aria-label="닫기">&times;</button>
         <img class="ticket-image" src="ticket.png" alt="티켓">
       </div>
-    </section>
+    </div>
   </main>
+  <script>
+    const openTicket = document.getElementById('openTicket');
+    const closeTicket = document.getElementById('closeTicket');
+    const ticketModal = document.getElementById('ticketModal');
+
+    openTicket.addEventListener('click', () => {
+      ticketModal.classList.add('is-open');
+      ticketModal.setAttribute('aria-hidden', 'false');
+    });
+
+    closeTicket.addEventListener('click', () => {
+      ticketModal.classList.remove('is-open');
+      ticketModal.setAttribute('aria-hidden', 'true');
+    });
+
+    ticketModal.addEventListener('click', (event) => {
+      if (event.target === ticketModal) {
+        ticketModal.classList.remove('is-open');
+        ticketModal.setAttribute('aria-hidden', 'true');
+      }
+    });
+  </script>
 </body>
 </html>
